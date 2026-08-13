@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "suite": { "name": "jsonl-double", "revision": "cases-v1" },
+  "target": {
+    "name": "example-jsonl-runner",
+    "revision": "source-v1",
+    "files": ["examples/runner.mjs"]
+  },
+  "runner": {
+    "executable": "node",
+    "cwd": ".",
+    "warmup": 1,
+    "repeat": 5,
+    "timeoutMs": 5000,
+    "maxOutputBytes": 65536,
+    "concurrency": 1
+  },
+  "scorer": {
+    "version": "dsh-benchmark-scorer/1",
+    "minPassRate": 1,
+    "maxMedianLatencyRegressionPct": 20,
+    "requireStableOutput": true
+  },
+  "cases": [
+    {
+      "id": "two-records",
+      "argv": ["examples/runner.mjs"],
+      "stdinJsonl": [{ "number": 2 }, { "number": 5 }],
+      "expected": {
+        "exitCode": 0,
+        "stdoutSha256": "dc72de88bcb3bc3146403d4cfc87a72460e0bf0197448ebd4e08374a11f5d141",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdoutJsonlLines": 2
+      }
+    }
+  ]
+}

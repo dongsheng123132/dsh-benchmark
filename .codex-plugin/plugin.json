@@ -1,0 +1,17 @@
+{
+  "name": "dsh-benchmark",
+  "version": "0.1.0",
+  "description": "Reproducible deterministic benchmark evidence for DSH tools and plugins",
+  "author": {
+    "name": "hfshfg"
+  },
+  "interface": {
+    "displayName": "DSH Benchmark",
+    "shortDescription": "Run and compare deterministic plugin benchmarks.",
+    "longDescription": "Runs fixed benchmark cases with bounded subprocesses, records raw exit/latency/output-hash evidence, and writes content-addressed reports and baseline comparisons.",
+    "developerName": "hfshfg",
+    "category": "Developer Tools",
+    "capabilities": ["Benchmark manifests", "Deterministic scoring", "Regression evidence"],
+    "defaultPrompt": "Inspect this benchmark manifest, run its fixed cases, and compare the content-addressed report with the declared baseline."
+  }
+}
