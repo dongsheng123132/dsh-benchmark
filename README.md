@@ -1,5 +1,10 @@
 # dsh-benchmark
 
+[![CI](https://github.com/dongsheng123132/dsh-benchmark/actions/workflows/check.yml/badge.svg)](https://github.com/dongsheng123132/dsh-benchmark/actions/workflows/check.yml)
+[![MIT license](https://img.shields.io/github/license/dongsheng123132/dsh-benchmark)](LICENSE)
+[![Node.js 22+](https://img.shields.io/badge/Node.js-%E2%89%A522-339933?logo=nodedotjs&logoColor=white)](package.json)
+[![Awesome DSH Plugins](https://img.shields.io/badge/Awesome_DSH-verified_lab-0969da)](https://github.com/dongsheng123132/awesome-dsh-plugins#2origin-plugin-lab)
+
 Reproducible, deterministic benchmark evidence for [DeepSeek Harness](https://github.com/deepseek-ai/DeepSeek-Harness) tools and plugins.
 
 This project deliberately does **not** duplicate `dsh-batch-regression`, which runs one shell command repeatedly for median/distribution statistics. `dsh-benchmark` defines an evidence protocol around fixed cases: explicit target and suite revisions, file-derived target fingerprints, bounded argv-only subprocesses, raw measurements, versioned deterministic scoring, content-addressed reports, and baseline regression comparison.

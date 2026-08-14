@@ -1,5 +1,10 @@
 # dsh-benchmark
 
+[![CI](https://github.com/dongsheng123132/dsh-benchmark/actions/workflows/check.yml/badge.svg)](https://github.com/dongsheng123132/dsh-benchmark/actions/workflows/check.yml)
+[![MIT 许可证](https://img.shields.io/github/license/dongsheng123132/dsh-benchmark)](LICENSE)
+[![Node.js 22+](https://img.shields.io/badge/Node.js-%E2%89%A522-339933?logo=nodedotjs&logoColor=white)](package.json)
+[![Awesome DSH Plugins](https://img.shields.io/badge/Awesome_DSH-%E5%B7%B2%E9%AA%8C%E8%AF%81%E5%AE%9E%E9%AA%8C-0969da)](https://github.com/dongsheng123132/awesome-dsh-plugins/blob/main/README.zh-CN.md#2origin-%E6%8F%92%E4%BB%B6%E5%AE%9E%E9%AA%8C%E5%AE%A4)
+
 面向 [DeepSeek Harness](https://github.com/deepseek-ai/DeepSeek-Harness) 工具和插件的、可复现的确定性基准证据协议。
 
 本项目不会复制已有的 `dsh-batch-regression`：后者侧重把一条 shell 命令重复 N 次并统计中位数/分布；`dsh-benchmark` 固定的是完整证据链——显式 target/suite revision、由文件重算的目标指纹、固定 cases、argv-only 受限子进程、逐次原始测量、带版本的判分规则、内容寻址报告以及基线回归比较。
