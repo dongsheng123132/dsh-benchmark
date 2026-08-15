@@ -11,6 +11,10 @@
 
 首版只评价命令和 JSONL runner 的确定性行为，不直接评价 LLM 主观质量。
 
+0.2.0 同时是正式 Codex 插件和独立的 proof-only MCP server，并采用真实 DSH Web Loader 所要求的命名空间导出形态；仓库内有真实 Cordis 启动回归，防止加载契约再次漂移。
+
+外部相邻方案多在评估 Skill 或 LLM 质量；本项目坚持做确定性执行证据层：固定目标 revision 和 cases，保留有界原始测量但不保留业务原文，使用版本化判分器、内容寻址报告与基线回归判决。
+
 ## 证据内容
 
 manifest 明确冻结：
@@ -49,6 +53,15 @@ dsh plugin --profile benchmark add github:dongsheng123132/dsh-benchmark
 - `dsh_benchmark_run`：运行固定 cases，生成内容寻址报告。
 - `dsh_benchmark_compare`：按 manifest 阈值比较当前报告与基线。
 
+## MCP
+
+`.mcp.json` 声明独立 stdio MCP server：
+
+- `benchmark_manifest_lint`：验证内联清单，只返回标识、边界策略以及 runner/case 输入哈希。
+- `benchmark_report_address`：重新计算报告精确 SHA-256，返回有界摘要，并拒绝原始输出与秘密形字段。
+
+MCP 只接受有界内联 JSON，不执行命令，也不读写文件系统。真实 benchmark 执行只保留在受 workspace 限制的 DSH 工具和 CLI 表面。
+
 ## 命令行
 
 ```bash
@@ -67,6 +80,8 @@ dsh-benchmark compare --root D:/project --manifest benchmark.json --baseline art
 npm test
 npm run check
 npm run smoke:plugin
+npm run smoke:mcp
+python C:/Users/ZhuanZ/.codex/skills/.system/plugin-creator/scripts/validate_plugin.py .
 ```
 
 要求 Node.js 22+。没有安装生命周期脚本；运行依赖只有可选的 DSH tools SDK peer。

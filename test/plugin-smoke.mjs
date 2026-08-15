@@ -4,8 +4,12 @@ import { copyFile, mkdtemp, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { createDefinitions } from '../index.js'
+import * as plugin from '../index.js'
 
 const hash = value => createHash('sha256').update(value).digest('hex')
+assert.equal('default' in plugin, false, 'a default export makes the real DSH Loader discard namespace inject metadata')
+assert.equal(plugin.name, 'dsh-benchmark')
+assert.deepEqual(plugin.inject, ['tools'])
 const root = await mkdtemp(join(tmpdir(), 'dsh-benchmark-plugin-'))
 await copyFile(new URL('fixture-runner.mjs', import.meta.url), join(root, 'runner.mjs'))
 const stdout = '{"args":["smoke"]}\n'
@@ -26,4 +30,4 @@ assert.equal(result.passed, true)
 assert.equal(result.artifact.verifiedByReadBack, true)
 const comparison = await tools[2].execute({ manifestPath: 'benchmark.json', baselinePath: result.artifact.path, currentPath: result.artifact.path, artifactDir: 'comparisons' })
 assert.equal(comparison.passed, true)
-console.log(JSON.stringify({ ok: true, tools: tools.map(tool => tool.name), report: result.artifact, comparison: comparison.artifact }))
+console.log(JSON.stringify({ ok: true, namespacePlugin: true, inject: plugin.inject, tools: tools.map(tool => tool.name), report: result.artifact, comparison: comparison.artifact }))

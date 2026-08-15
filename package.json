@@ -1,20 +1,24 @@
 {
   "name": "dsh-benchmark",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Reproducible deterministic benchmark evidence for DSH tools and plugins",
   "license": "MIT",
   "type": "module",
   "main": "./index.js",
   "exports": { ".": "./index.js", "./benchmark": "./lib/benchmark.mjs" },
   "bin": { "dsh-benchmark": "./bin/dsh-benchmark.mjs" },
-  "files": [".codex-plugin/", "index.js", "lib/", "bin/", "cordis.patch.yml", "examples/", "README.md", "README.zh-CN.md", "LICENSE"],
+  "files": [".codex-plugin/", ".mcp.json", "index.js", "lib/", "bin/", "cordis.patch.yml", "mcp-server.mjs", "examples/", "README.md", "README.zh-CN.md", "LICENSE", "SECURITY.md"],
   "dsh": { "bundle": { "patch": "./cordis.patch.yml" } },
   "peerDependencies": { "@deepseek-ai/dsh-tools": "*" },
   "peerDependenciesMeta": { "@deepseek-ai/dsh-tools": { "optional": true } },
+  "devDependencies": { "@deepseek-ai/dsh-tools": "0.0.1-rc.1" },
   "scripts": {
     "test": "node --test test/*.test.mjs",
     "check": "node scripts/check.mjs",
-    "smoke:plugin": "node test/plugin-smoke.mjs"
+    "smoke:plugin": "node test/plugin-smoke.mjs",
+    "smoke:mcp": "node test/mcp-smoke.mjs",
+    "smoke:dsh": "node test/dsh-runtime-smoke.mjs",
+    "smoke:web-loader": "node test/stock-web-loader-smoke.mjs"
   },
   "engines": { "node": ">=22" },
   "repository": { "type": "git", "url": "git+https://github.com/dongsheng123132/dsh-benchmark.git" },

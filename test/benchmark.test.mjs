@@ -4,7 +4,7 @@ import { copyFile, mkdtemp, readFile, symlink, writeFile } from 'node:fs/promise
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import test from 'node:test'
-import { compareBenchmarkReports, inspectBenchmarkManifest, normalizeManifest, runBenchmark } from '../lib/benchmark.mjs'
+import { addressBenchmarkReportJson, compareBenchmarkReports, inspectBenchmarkManifest, inspectBenchmarkManifestJson, normalizeManifest, runBenchmark } from '../lib/benchmark.mjs'
 
 const emptyHash = hash('')
 
@@ -51,6 +51,21 @@ test('runs fixed JSONL cases and writes read-back verified raw evidence', async 
   assert.deepEqual(result.report.cases[0].runs.map(run => run.phase), ['warmup', 'measure', 'measure'])
   assert.equal(result.report.cases[0].runs.every(run => run.score.passed), true)
   assert.equal(hash(await readFile(join(root, result.artifact.path))), result.artifact.sha256)
+})
+
+test('inline proof surfaces validate manifests and address reports without execution', () => {
+  const stdout = jsonLine({ args: ['ok'] })
+  const manifest = manifestFor([{ id: 'case', argv: ['runner.mjs', 'args', 'ok'], expected: { exitCode: 0, stdoutSha256: hash(stdout) } }])
+  const manifestJson = JSON.stringify(manifest)
+  const inspected = inspectBenchmarkManifestJson(manifestJson)
+  assert.equal(inspected.manifestSha256, hash(manifestJson))
+  assert.equal(inspected.cases[0].argvCount, 3)
+  assert.equal('argv' in inspected.cases[0], false)
+  const reportJson = `${JSON.stringify({ schemaVersion: 1, kind: 'dsh.benchmark-report', suite: manifest.suite, target: { name: 'fixture', revision: 'source-v1', fingerprint: hash('fixture') }, cases: [{ id: 'case', passed: true }], passed: true }, null, 2)}\n`
+  const addressed = addressBenchmarkReportJson(reportJson)
+  assert.equal(addressed.reportSha256, hash(reportJson))
+  assert.equal(addressed.verifiedByRecomputation, true)
+  assert.throws(() => addressBenchmarkReportJson(JSON.stringify({ ...JSON.parse(reportJson), raw: 'do-not-echo' })), /forbidden raw or secret-bearing field/)
 })
 
 test('does not invoke a shell and does not inherit secret environment variables', async () => {

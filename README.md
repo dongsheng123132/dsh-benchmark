@@ -11,6 +11,10 @@ This project deliberately does **not** duplicate `dsh-batch-regression`, which r
 
 The first release evaluates commands and JSONL runners, not subjective LLM quality.
 
+Version 0.2.0 is a formal Codex plugin and standalone proof-only MCP server, and uses the namespace export shape required by the stock DSH Web Loader. A real Cordis boot regression test guards that loader contract.
+
+Adjacent benchmark skills often grade Skill or LLM quality. This project stays at the deterministic execution-evidence layer: fixed target revisions and cases, raw bounded measurements without raw business output, versioned scoring, content-addressed reports, and baseline regression decisions.
+
 ## Evidence model
 
 An explicit manifest freezes:
@@ -48,6 +52,15 @@ The bundle registers:
 - `dsh_benchmark_inspect` — inspect protocol metadata and fingerprints without execution.
 - `dsh_benchmark_run` — run fixed cases and write a content-addressed report.
 - `dsh_benchmark_compare` — compare current and baseline reports with manifest thresholds.
+
+## MCP
+
+`.mcp.json` declares a standalone stdio MCP server:
+
+- `benchmark_manifest_lint` validates an inline manifest and returns only identifiers, bounded policies and hashes of runner/case inputs.
+- `benchmark_report_address` recomputes the exact report SHA-256 and returns a bounded summary while rejecting raw-output and secret-bearing fields.
+
+MCP accepts bounded inline JSON, never executes a command, and never reads or writes the filesystem. Actual benchmark execution remains available only through the workspace-bounded DSH tool and CLI surfaces.
 
 ## CLI
 
@@ -88,6 +101,8 @@ Arguments and JSONL values can contain ordinary test data, but the report stores
 npm test
 npm run check
 npm run smoke:plugin
+npm run smoke:mcp
+python C:/Users/ZhuanZ/.codex/skills/.system/plugin-creator/scripts/validate_plugin.py .
 ```
 
 Requires Node.js 22+. No runtime dependency or install lifecycle script is used beyond the optional DSH tools SDK peer.
