@@ -1,17 +1,56 @@
 {
   "name": "dsh-benchmark",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Reproducible deterministic benchmark evidence for DSH tools and plugins",
   "license": "MIT",
   "type": "module",
   "main": "./index.js",
-  "exports": { ".": "./index.js", "./benchmark": "./lib/benchmark.mjs" },
-  "bin": { "dsh-benchmark": "./bin/dsh-benchmark.mjs" },
-  "files": [".codex-plugin/", ".mcp.json", "index.js", "lib/", "bin/", "cordis.patch.yml", "mcp-server.mjs", "examples/", "README.md", "README.zh-CN.md", "LICENSE", "SECURITY.md"],
-  "dsh": { "bundle": { "patch": "./cordis.patch.yml" } },
-  "peerDependencies": { "@deepseek-ai/dsh-tools": "*" },
-  "peerDependenciesMeta": { "@deepseek-ai/dsh-tools": { "optional": true } },
-  "devDependencies": { "@deepseek-ai/dsh-tools": "0.0.1-rc.1" },
+  "exports": {
+    ".": "./index.js",
+    "./benchmark": "./lib/benchmark.mjs"
+  },
+  "bin": {
+    "dsh-benchmark": "./bin/dsh-benchmark.mjs"
+  },
+  "files": [
+    ".codex-plugin/",
+    ".mcp.json",
+    "index.js",
+    "lib/",
+    "bin/",
+    "cordis.patch.yml",
+    "mcp-server.mjs",
+    "examples/",
+    "README.md",
+    "README.zh-CN.md",
+    "LICENSE",
+    "SECURITY.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "compatibility": {
+      "dsh": ">=0.1.2-alpha.4",
+      "node": ">=22",
+      "dshReleases": {
+        "0.1.2-alpha.4": "compatible",
+        "0.1.2-alpha.5": "compatible",
+        "0.1.2-rc.1": "compatible"
+      }
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh-tools": "*"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/dsh-tools": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@deepseek-ai/dsh-tools": "0.1.2-rc.1"
+  },
   "scripts": {
     "test": "node --test test/*.test.mjs",
     "check": "node scripts/check.mjs",
@@ -20,7 +59,20 @@
     "smoke:dsh": "node test/dsh-runtime-smoke.mjs",
     "smoke:web-loader": "node test/stock-web-loader-smoke.mjs"
   },
-  "engines": { "node": ">=22" },
-  "repository": { "type": "git", "url": "git+https://github.com/dongsheng123132/dsh-benchmark.git" },
-  "keywords": ["deepseek-harness", "dsh", "dsh-plugin", "benchmark", "regression", "evidence", "provenance"]
+  "engines": {
+    "node": ">=22"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dongsheng123132/dsh-benchmark.git"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "benchmark",
+    "regression",
+    "evidence",
+    "provenance"
+  ]
 }

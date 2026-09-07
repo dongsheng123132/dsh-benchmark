@@ -1,6 +1,6 @@
 {
   "name": "dsh-benchmark",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Reproducible deterministic benchmark evidence for DSH tools and plugins",
   "author": {
     "name": "2Origin",
@@ -9,7 +9,12 @@
   "homepage": "https://github.com/dongsheng123132/dsh-benchmark#readme",
   "repository": "https://github.com/dongsheng123132/dsh-benchmark",
   "license": "MIT",
-  "keywords": ["deepseek-harness", "benchmark", "regression", "evidence"],
+  "keywords": [
+    "deepseek-harness",
+    "benchmark",
+    "regression",
+    "evidence"
+  ],
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "DSH Benchmark",
@@ -17,7 +22,13 @@
     "longDescription": "Runs fixed benchmark cases with bounded subprocesses, records raw exit/latency/output-hash evidence, and writes content-addressed reports and baseline comparisons.",
     "developerName": "hfshfg",
     "category": "Developer Tools",
-    "capabilities": ["Read", "Execute", "Audit"],
-    "defaultPrompt": ["Inspect this benchmark manifest and explain its deterministic evidence contract."]
+    "capabilities": [
+      "Read",
+      "Execute",
+      "Audit"
+    ],
+    "defaultPrompt": [
+      "Inspect this benchmark manifest and explain its deterministic evidence contract."
+    ]
   }
 }
