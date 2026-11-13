@@ -39,10 +39,13 @@
         "0.1.2-alpha.5": "compatible",
         "0.1.2-rc.1": "compatible"
       }
+    },
+    "engines": {
+      "dsh": ">=0.1.2-alpha.4 <0.3.0"
     }
   },
   "peerDependencies": {
-    "@deepseek-ai/dsh-tools": "*"
+    "@deepseek-ai/dsh-tools": ">=0.1.2-alpha.4 <0.3.0"
   },
   "peerDependenciesMeta": {
     "@deepseek-ai/dsh-tools": {
